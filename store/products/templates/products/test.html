@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <h>работаем с контекстом</h>
+</head>
+<body>
+    <P>РОБОТА СО СПИСКОМ</P>
+     <div>
+        {% with message=msg %}
+            <h2>{{ message|add:" Django" }}</h2>
+        {% endwith %}
+    </div>
+    <div>
+        {% with message=msg %}
+            <h2>{{ message|cut:"da" }}</h2>
+        {% endwith %}
+    </div>
+    <div>
+        {% with test=value %}
+            <h2>{{ isEnabled|default:"unabled" }}</h2>
+        {% endwith %}
+    </div>
+    <div>
+        <P>РОБОТА СО СПИСКОМ</P>
+        <h2>{{ names|join:"*+++ " }}</h2>
+        <h2>{{ names|length }}</h2>
+
+        {% for values in names %}
+            {% if "v" in values %}
+                <P>{{ values.upper }}</P>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>
