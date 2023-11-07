@@ -1,0 +1,18 @@
+import os
+
+import sys
+
+import django
+
+os.chdir('C:\\Users\\vladr\OneDrive\\Рабочий стол\\course\\store_server\\store')
+
+sys.path.append('C:\\Users\\vladr\OneDrive\\Рабочий стол\\course\\store_server\\store')
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'store.settings')
+
+from django.conf import settings
+
+django.setup()
+
+from products.models import ProductCategory
+from products.models import Product
