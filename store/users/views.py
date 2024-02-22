@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.urls import reverse
+
 # Create your views here.
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 
@@ -12,9 +13,14 @@ def login(request):
             username = request.POST['username']
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password) #аутентификация проверяем есть ли юзер в бд
+            if user.last_name == 'Владислав':
+                print('ok')
+
             if user:
                 auth.login(request, user) #авторизация
                 return HttpResponseRedirect(reverse('index')) #переадресация
+        else:
+            print(form.errors)
 
     else: #если гет
         form = UserLoginForm()
@@ -31,9 +37,10 @@ def registration(request):
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save() #сохранит обьект в бд
+            messages.success(request, 'Успешная реестрация')
             return HttpResponseRedirect(reverse('users:login'))
         else:
-            return HttpResponseRedirect(reverse('index'))  # переадресация
+            print(form.errors)
     else:
         form = UserRegistrationForm()
 

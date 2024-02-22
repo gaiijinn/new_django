@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from products.models import ProductCategory, Product
+from users.models import User
 
 # Create your views here.
 
@@ -28,5 +29,7 @@ def some_test(request):
         "names": [
             "vlad", "vlada"
         ],
+        'test': User.objects.get(id=4)
     }
+
     return render(request, 'products/test.html', context=context)
