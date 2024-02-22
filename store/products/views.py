@@ -20,13 +20,3 @@ def products(request):
     }
     return render(request, 'products/products.html', context=context)
 
-
-def some_test(request):
-    context = {
-        "msg": "darova",
-        "value": False,
-        "names": [
-            "vlad", "vlada"
-        ],
-    }
-    return render(request, 'products/test.html', context=context)
