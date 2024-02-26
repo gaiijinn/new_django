@@ -5,6 +5,7 @@ from django.urls import reverse
 
 from users.models import User
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from products.models import Basket
 
 
 # Create your views here.
@@ -65,7 +66,8 @@ def profile(request):
 
     context = {
         "title": "Профиль",
-        'form': form
+        'form': form,
+        'baskets': Basket.objects.filter(user=request.user).all() #только корзину юзера
     }
 
     return render(request, 'users/profile.html', context=context)

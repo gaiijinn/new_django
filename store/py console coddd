@@ -16,4 +16,5 @@ django.setup()
 
 from products.models import ProductCategory
 from products.models import Product
+from products.models import Basket
 from users.models import User
