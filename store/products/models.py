@@ -1,14 +1,5 @@
 from django.db import models
-import os
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "store.settings")
-
-import django
-
-#django.setup()
-
-
-# Create your models here.
+from users.models import User
 
 
 class ProductCategory(models.Model):
@@ -30,3 +21,12 @@ class Product(models.Model):
     def __str__(self):
         return f"Название - {self.name} | Категория - {self.category.name}"
 
+
+class Basket(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0)
+    created_timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Корзина для {self.user.email} | Продукт {self.product.name}"
