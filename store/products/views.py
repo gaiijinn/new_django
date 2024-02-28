@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from products.models import ProductCategory, Product, Basket
 from users.models import User
 
@@ -13,15 +14,26 @@ def index(request):
     return render(request, 'products/index.html', context=context)
 
 
-def products(request):
+def products(request, category_id=None):
+    all_stuff = ProductCategory.objects.get(id=category_id)
+
+    if all_stuff.name == "Все товары":
+        products = Product.objects.all()
+    elif category_id:
+        products = Product.objects.filter(category_id=category_id)
+    else:
+        products = Product.objects.all()
+
     context = {
         "title": "Каталог",
-        "products": Product.objects.all(),
-        'category': ProductCategory.objects.all(),
+        'categories': ProductCategory.objects.all(),
+        'products': products,
     }
+
     return render(request, 'products/products.html', context=context)
 
 
+@login_required
 def basket_add(request, product_id):
     product = Product.objects.get(id=product_id) #получаем продукт по id НЕ ВСЕ СРАЗУ
     baskets = Basket.objects.filter(user=request.user, product=product) #смотрим есть ли такой продукт в кверисете
@@ -36,8 +48,11 @@ def basket_add(request, product_id):
     return HttpResponseRedirect(request.META['HTTP_REFERER']) #возращаем на ту страницу где находиться чел
 
 
+@login_required
 def basket_remove(request, basket_id): #у нас по сути много корзинок*
     basket = Basket.objects.get(id=basket_id) #берем нужную и удаляем
     basket.delete()
 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+

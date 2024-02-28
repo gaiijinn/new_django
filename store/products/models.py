@@ -24,7 +24,7 @@ class Product(models.Model):
 
 class BasketQuerySet(models.QuerySet): #дополняем методами менеджер
     def total_sum(self):
-        return sum(basket.sum() for basket in self.filter())
+        return sum(basket.sum() for basket in self)
 
     def total_quantity(self):
         return sum(basket.quantity for basket in self)
