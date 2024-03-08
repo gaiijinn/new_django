@@ -5,7 +5,10 @@
     <file url="file://$PROJECT_DIR$/db.json" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/products/fixtures/categories.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/products/fixtures/product.json" charset="UTF-8" />
+<<<<<<< HEAD
     <file url="file://$PROJECT_DIR$/users/fixtures/users.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/users/models.py" charset="windows-1251" />
+=======
+>>>>>>> after_pause
   </component>
 </project>
