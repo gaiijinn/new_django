@@ -1,37 +1,38 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from products.models import ProductCategory, Product, Basket
-from django.core.paginator import Paginator
-from users.models import User
-
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 # Create your views here.
 
 
-def index(request):
-    context = {
-        "title": 'Главная',
-        "is_promotion": True,
-    }
-    return render(request, 'products/index.html', context=context)
+class IndexView(TemplateView):
+    template_name = 'products/index.html'
+
+    def get_context_data(self, **kwargs): #из документации
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context["title"] = 'Store'
+        return context
 
 
-def products(request, category_id=None, page_number=1):
-    if category_id:
-        products = Product.objects.filter(category_id=category_id)
-    else:
-        products = Product.objects.all()
+class ProductsListVies(ListView):
+    model = Product #модель из бд
+    template_name = "products/products.html"
+    paginate_by = 3  #для пагинатора + изменился код в шаблоне
 
-    per_page = 3
-    paginator = Paginator(products, per_page) #пагинация
-    products_paginator = paginator.page(page_number)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductsListVies, self).get_context_data()
+        context['title'] = 'Каталог'
+        context['categories'] = ProductCategory.objects.all()
 
-    context = {
-        "title": "Каталог",
-        'categories': ProductCategory.objects.all(),
-        'products': products_paginator,
-    }
+        return context
 
-    return render(request, 'products/products.html', context=context)
+    def get_queryset(self):
+        queryset = super(ProductsListVies, self).get_queryset() #типо как all для нашей модели
+        #print(self.kwargs) #в этот словарь получаем значения
+        category_id = self.kwargs.get('category_id') #из юрлг где указываем что передаем
+
+        return queryset.filter(category=category_id) if category_id else queryset
 
 
 @login_required
