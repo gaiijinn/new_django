@@ -1,12 +1,7 @@
-<<<<<<< HEAD
-from django.shortcuts import render, HttpResponse
-from products.models import ProductCategory, Product
-=======
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from products.models import ProductCategory, Product, Basket
 from django.core.paginator import Paginator
->>>>>>> after_pause
 from users.models import User
 
 # Create your views here.
@@ -39,19 +34,6 @@ def products(request, category_id=None, page_number=1):
     return render(request, 'products/products.html', context=context)
 
 
-<<<<<<< HEAD
-def some_test(request):
-    context = {
-        "msg": "darova",
-        "value": False,
-        "names": [
-            "vlad", "vlada"
-        ],
-        'test': User.objects.get(id=4)
-    }
-
-    return render(request, 'products/test.html', context=context)
-=======
 @login_required
 def basket_add(request, product_id):
     product = Product.objects.get(id=product_id) #получаем продукт по id НЕ ВСЕ СРАЗУ
@@ -74,5 +56,3 @@ def basket_remove(request, basket_id): #у нас по сути много ко�
 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
-
->>>>>>> after_pause
