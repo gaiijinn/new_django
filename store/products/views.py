@@ -3,26 +3,29 @@ from django.contrib.auth.decorators import login_required
 from products.models import ProductCategory, Product, Basket
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
+from common.views import TitleMixin #наш миксин
 # Create your views here.
 
 
-class IndexView(TemplateView):
+class IndexView(TitleMixin, TemplateView):
     template_name = 'products/index.html'
+    title = 'Магазин'
 
-    def get_context_data(self, **kwargs): #из документации
-        context = super(IndexView, self).get_context_data(**kwargs)
-        context["title"] = 'Store'
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(IndexView, self).get_context_data()
+        context['is_promotion'] = False
+
         return context
 
 
-class ProductsListVies(ListView):
+class ProductsListVies(TitleMixin ,ListView):
     model = Product #модель из бд
     template_name = "products/products.html"
     paginate_by = 3  #для пагинатора + изменился код в шаблонеs
+    title = 'Каталог'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductsListVies, self).get_context_data()
-        context['title'] = 'Каталог'
         context['categories'] = ProductCategory.objects.all()
 
         return context

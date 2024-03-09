@@ -137,6 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #users
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User' #для модели
 LOGIN_URL = '/users/login/'
-
+LOGIN_REDIRECT_URL = '/'  #для CBV LoginView users.views
+LOGOUT_REDIRECT_URL = 'index' #ссылка после выхода из юзера! *нам не нужно писать вью просто в Urls*
