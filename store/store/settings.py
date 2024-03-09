@@ -141,3 +141,8 @@ AUTH_USER_MODEL = 'users.User' #для модели
 LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/'  #для CBV LoginView users.views
 LOGOUT_REDIRECT_URL = 'index' #ссылка после выхода из юзера! *нам не нужно писать вью просто в Urls*
+
+
+#email backend
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
