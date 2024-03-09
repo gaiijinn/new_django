@@ -18,7 +18,7 @@ class IndexView(TemplateView):
 class ProductsListVies(ListView):
     model = Product #модель из бд
     template_name = "products/products.html"
-    paginate_by = 3  #для пагинатора + изменился код в шаблоне
+    paginate_by = 3  #для пагинатора + изменился код в шаблонеs
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductsListVies, self).get_context_data()
