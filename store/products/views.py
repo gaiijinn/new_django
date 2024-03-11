@@ -18,7 +18,7 @@ class IndexView(TitleMixin, TemplateView):
         return context
 
 
-class ProductsListVies(TitleMixin ,ListView):
+class ProductsListVies(TitleMixin, ListView):
     model = Product #модель из бд
     template_name = "products/products.html"
     paginate_by = 3  #для пагинатора + изменился код в шаблонеs

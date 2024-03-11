@@ -36,11 +36,6 @@ class UserProfileView(TitleMixin, UpdateView):
     def get_success_url(self): #вместо reverse_lazy потому что в у нас в url появился id
         return reverse_lazy('users:profile', args=(self.object.id,))
 
-    def get_context_data(self, **kwargs):
-        context = super(UserProfileView, self).get_context_data()
-        context['baskets'] = Basket.objects.filter(user=self.object) #обджект как модель наша
-        return context
-
 
 class EmailVerificationView(TitleMixin, TemplateView):
     title = 'Верификация'
