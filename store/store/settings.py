@@ -139,12 +139,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #users
 
-AUTH_USER_MODEL = 'users.User' #для модели
-LOGIN_URL = '/users/login/'
-LOGIN_REDIRECT_URL = '/'  #для CBV LoginView users.views
+AUTH_USER_MODEL = 'users.User' #пеоепределяем модель
+LOGIN_URL = '/users/login/' # для декоратора login_required
+LOGIN_REDIRECT_URL = '/'  #после успешного входа редирект
 LOGOUT_REDIRECT_URL = 'index' #ссылка после выхода из юзера! *нам не нужно писать вью просто в Urls*
 
+#email sending
 
-#email backend
+# https://support.google.com/a/answer/176600?hl=ru
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = 'vladruban8@gmail.com'
+EMAIL_HOST_PASSWORD = 'okzv rgwx coom qwsa' #пароли приложений
+EMAIL_USE_SSL = True
