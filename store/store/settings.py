@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -67,7 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'products.context_processors.baskets', #для глобального доступа к корзине
+                'products.context_processors.baskets',  # для глобального доступа к корзине
             ],
         },
     },
@@ -138,19 +137,19 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#users
+# users
 
-AUTH_USER_MODEL = 'users.User' #пеоепределяем модель
-LOGIN_URL = '/users/login/' # для декоратора login_required
-LOGIN_REDIRECT_URL = '/'  #после успешного входа редирект
-LOGOUT_REDIRECT_URL = 'index' #ссылка после выхода из юзера! *нам не нужно писать вью просто в Urls*
+AUTH_USER_MODEL = 'users.User'  # пеоепределяем модель
+LOGIN_URL = '/users/login/'  # для декоратора login_required
+LOGIN_REDIRECT_URL = '/'   # после успешного входа редирект
+LOGOUT_REDIRECT_URL = 'index'  # ссылка после выхода из юзера! *нам не нужно писать вью просто в Urls*
 
-#email sending
+# email sending
 
 # https://support.google.com/a/answer/176600?hl=ru
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '465'
 EMAIL_HOST_USER = 'vladruban8@gmail.com'
-EMAIL_HOST_PASSWORD = 'okzv rgwx coom qwsa' #пароли приложений
+EMAIL_HOST_PASSWORD = 'okzv rgwx coom qwsa'  # пароли приложений
 EMAIL_USE_SSL = True

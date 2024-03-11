@@ -1,0 +1,6 @@
+[flake8]
+exclude =
+    migrations
+    tests
+
+max-line-length = 120

@@ -1,4 +1,5 @@
 from django.db import models
+
 from users.models import User
 
 
@@ -7,9 +8,8 @@ class ProductCategory(models.Model):
     description = models.TextField(null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Категория' #отображение в админне
-        verbose_name_plural = 'Категории'  #отображение в админне в множине
-
+        verbose_name = 'Категория'  # отображение в админне
+        verbose_name_plural = 'Категории'   # отображение в админне в множине
 
     def __str__(self):
         return self.name
@@ -24,14 +24,14 @@ class Product(models.Model):
     category = models.ForeignKey(to=ProductCategory, on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = 'Продукт' #отображение в админне
-        verbose_name_plural = 'Продукты'  #отображение в админне в множине
+        verbose_name = 'Продукт'  # отображение в админне
+        verbose_name_plural = 'Продукты'  # отображение в админне в множине
 
     def __str__(self):
         return f"Название - {self.name} | Категория - {self.category.name}"
 
 
-class BasketQuerySet(models.QuerySet): #дополняем методами менеджер
+class BasketQuerySet(models.QuerySet):  # дополняем методами менеджер
     def total_sum(self):
         return sum(basket.sum() for basket in self)
 
@@ -45,7 +45,7 @@ class Basket(models.Model):
     quantity = models.IntegerField(default=0)
     created_timestamp = models.DateTimeField(auto_now_add=True)
 
-    objects = BasketQuerySet.as_manager() # указуем что используем его как менеджер вместо object.
+    objects = BasketQuerySet.as_manager()  # указуем что используем его как менеджер вместо object.
 
     def __str__(self):
         return f"Корзина для {self.user.email} | Продукт {self.product.name}"
@@ -54,5 +54,5 @@ class Basket(models.Model):
         return self.product.price * self.quantity
 
     class Meta:
-        verbose_name = 'Корзина' #отображение в админне
-        verbose_name_plural = 'Корзины'  #отображение в админне в множине
+        verbose_name = 'Корзина'  # отображение в админне
+        verbose_name_plural = 'Корзины'  # отображение в админне в множине

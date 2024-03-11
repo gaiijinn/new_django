@@ -1,10 +1,12 @@
-import uuid #Для кода
+import uuid  # Для кода
 from datetime import timedelta
 
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from users.models import User, EmailVerification
 from django import forms
+from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
+                                       UserCreationForm)
 from django.utils.timezone import now
+
+from users.models import EmailVerification, User
 
 
 class UserLoginForm(AuthenticationForm):
@@ -58,11 +60,11 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
 
-    def save(self, commit=True): #для отправки почты по время save, def save возращает юзера
+    def save(self, commit=True):  # для отправки почты по время save, def save возращает юзера
         user = super(UserRegistrationForm, self).save(commit=True)
         expiration = now() + timedelta(hours=48)
         verif = EmailVerification.objects.create(code=uuid.uuid4(), user=user, expiration=expiration)
-        verif.send_verif_email() #from models def
+        verif.send_verif_email()  # from models def
         return user
 
 

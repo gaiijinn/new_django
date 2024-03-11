@@ -1,14 +1,13 @@
-from django.urls import reverse_lazy, reverse
-from django.shortcuts import HttpResponseRedirect
-from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic.base import TemplateView
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
-from common.views import TitleMixin
+from django.shortcuts import HttpResponseRedirect
+from django.urls import reverse, reverse_lazy
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView, UpdateView
 
-from users.models import User, EmailVerification
-from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
-from products.models import Basket
+from common.views import TitleMixin
+from users.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
+from users.models import EmailVerification, User
 
 
 class UserLoginView(TitleMixin, LoginView):
@@ -23,7 +22,7 @@ class UserRegistrationView(TitleMixin, SuccessMessageMixin, CreateView):
     model = User
     template_name = "users/registration.html"
     form_class = UserRegistrationForm
-    success_url = reverse_lazy('users:login') #вместо обычного reverse
+    success_url = reverse_lazy('users:login')  # вместо обычного reverse
     success_message = 'Поздравляем! Вы успешно создали аккаунт.'
 
 
@@ -33,7 +32,7 @@ class UserProfileView(TitleMixin, UpdateView):
     template_name = "users/profile.html"
     form_class = UserProfileForm
 
-    def get_success_url(self): #вместо reverse_lazy потому что в у нас в url появился id
+    def get_success_url(self):  # вместо reverse_lazy потому что в у нас в url появился id
         return reverse_lazy('users:profile', args=(self.object.id,))
 
 
