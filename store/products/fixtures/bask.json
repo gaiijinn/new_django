@@ -1,0 +1,1 @@
+[{"model": "products.basket", "pk": 10, "fields": {"user": 18, "product": 11, "quantity": 1, "created_timestamp": "2024-03-11T18:50:03.393Z"}}]

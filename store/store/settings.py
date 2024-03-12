@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+DEFAULT_CHARSET = 'utf-8'
+
 DOMAIN_NAME = 'http://localhost:8000'
 
 # Application definition
