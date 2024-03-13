@@ -179,7 +179,7 @@ SITE_ID = 1
 
 SOCIALACCOUNT_PROVIDERS = {
     'github': {
-        'SCOPE': [
+        'SCOPE': [  # указуем разрешения
             'user',
         ]
     }
