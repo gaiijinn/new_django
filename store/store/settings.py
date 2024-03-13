@@ -153,8 +153,9 @@ LOGOUT_REDIRECT_URL = 'index'  # ссылка после выхода из юз�
 
 # https://support.google.com/a/answer/176600?hl=ru
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '465'
-EMAIL_HOST_USER = 'vladruban8@gmail.com'
-EMAIL_HOST_PASSWORD = 'okzv rgwx coom qwsa'  # пароли приложений
-EMAIL_USE_SSL = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = '465'
+# EMAIL_HOST_USER = 'vladruban8@gmail.com'
+# EMAIL_HOST_PASSWORD = 'okzv rgwx coom qwsa'  # пароли приложений
+# EMAIL_USE_SSL = True
+EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend'
