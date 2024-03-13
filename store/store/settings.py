@@ -40,9 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'products',
     'users',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'allauth.account.middleware.AccountMiddleware',  # OAuth
 ]
 
 ROOT_URLCONF = 'store.urls'
@@ -153,8 +161,26 @@ LOGOUT_REDIRECT_URL = 'index'  # ссылка после выхода из юз�
 
 # https://support.google.com/a/answer/176600?hl=ru
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '465'
-EMAIL_HOST_USER = 'vladruban8@gmail.com'
-EMAIL_HOST_PASSWORD = 'okzv rgwx coom qwsa'  # пароли приложений
-EMAIL_USE_SSL = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = '465'
+# EMAIL_HOST_USER = 'vladruban8@gmail.com'
+# EMAIL_HOST_PASSWORD = 'okzv rgwx coom qwsa'  # пароли приложений
+# EMAIL_USE_SSL = True
+EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend'
+
+# OAuth
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        'SCOPE': [
+            'user',
+        ]
+    }
+}
