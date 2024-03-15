@@ -10,7 +10,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'store.settings')
 django.setup()
 
 
-
 class IndexViewTestCase(TestCase):
     def test_view(self):
         path = reverse('index')

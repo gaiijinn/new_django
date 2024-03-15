@@ -77,24 +77,24 @@
                     <ul class="pagination justify-content-center">
                         <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
                             <a class="page-link"
-                               href="{% if page_obj.has_previous %} {% url 'products:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
+                               href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% if request.GET.category_id %}&category_id={{ request.GET.category_id }}{% endif %} {% else %} # {% endif %}"
                                tabindex="-1" aria-disabled="true">
                                    Предыдущая
                             </a>
                         </li>
                         {% for page in paginator.page_range %}
-                        <li class="page-item">
-                            <a class="page-link"
-                                href="{% url 'products:paginator' page %}">
-                                {{ page }}
-                            </a>
-                        </li>
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="?page={{ page }}{% if request.GET.category_id %}&category_id={{ request.GET.category_id }}{% endif %}">
+                                    {{ page }}
+                                </a>
+                            </li>
                         {% endfor %}
                         <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
                             <a class="page-link"
-                             href="{% if page_obj.has_next %} {% url 'products:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">
-                                Следующая
-                             </a>
+                               href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% if request.GET.category_id %}&category_id={{ request.GET.category_id }}{% endif %} {% else %} # {% endif %}">
+                                   Следующая
+                            </a>
                         </li>
                     </ul>
                 </nav>

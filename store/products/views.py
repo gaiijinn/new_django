@@ -36,7 +36,6 @@ class ProductsListVies(TitleMixin, ListView):
         queryset = super(ProductsListVies, self).get_queryset()  # типо как all для нашей модели
         # print(self.kwargs) #в этот словарь получаем значения
         category_id = self.kwargs.get('category_id')  # из юрлг где указываем что передаем
-
         return queryset.filter(category=category_id) if category_id else queryset
 
 
