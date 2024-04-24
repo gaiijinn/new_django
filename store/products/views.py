@@ -5,6 +5,7 @@ from django.views.generic.list import ListView
 
 from common.views import TitleMixin  # наш миксин
 from products.models import Basket, Product, ProductCategory
+from django.core.cache import cache
 
 # Create your views here.
 
@@ -26,17 +27,21 @@ class ProductsListVies(TitleMixin, ListView):
     paginate_by = 3  # для пагинатора + изменился код в шаблонеs
     title = 'Каталог'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ProductsListVies, self).get_context_data()
-        context['categories'] = ProductCategory.objects.all()
-
-        return context
-
     def get_queryset(self):
         queryset = super(ProductsListVies, self).get_queryset()  # типо как all для нашей модели
         # print(self.kwargs) #в этот словарь получаем значения
         category_id = self.kwargs.get('category_id')  # из юрлг где указываем что передаем
         return queryset.filter(category=category_id) if category_id else queryset
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductsListVies, self).get_context_data()
+        categories = cache.get('categories')
+        if not categories:
+            context['categories'] = ProductCategory.objects.all()
+            cache.set('categories', context['categories'], 30)
+        else:
+            context['categories'] = categories
+        return context
 
 
 @login_required
