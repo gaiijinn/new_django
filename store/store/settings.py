@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'products',
     'users',
+    'orders',
 
     'allauth',
     'allauth.account',
@@ -111,7 +112,7 @@ DATABASES = {
         'NAME': 'my_store_db',
         'USER': 'admin',
         'PASSWORD': 'admin',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     },
 }
