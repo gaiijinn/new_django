@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 from django.views.decorators.csrf import csrf_exempt
 from orders.forms import OrderForm
 from django.urls import reverse_lazy, reverse
@@ -10,6 +11,7 @@ from django.http import HttpResponseRedirect
 from http import HTTPStatus
 import stripe
 from products.models import Basket
+from orders.models import Order
 
 # Create your views here.
 
@@ -77,15 +79,16 @@ def stripe_webhook_view(request):
 
         line_items = session.line_items
         # Fulfill the purchase...
-        fulfill_order(line_items)
+        fulfill_order(line_items, session)
 
     # Passed signature verification
     return HttpResponse(status=200)
 
 
-def fulfill_order(line_items):
-  # TODO: fill me in
-  print("Fulfilling order")
+def fulfill_order(line_items, session):
+    order_id = int(session.metadata['order_id'])
+    order = Order.objects.get(id=order_id)
+    order.update_after_payment()
 
 
 class SuccessTemplateView(TitleMixin, TemplateView):
@@ -98,6 +101,12 @@ class CancelTemplateView(TitleMixin, TemplateView):
     title = 'Отмена заказа'
 
 
-class orders_show(TemplateView):
+class OrdersListView(TitleMixin, ListView):
     template_name = 'orders/orders.html'
+    title = 'Заказы'
+    queryset = Order.objects.all()
+    ordering = ('-created')
 
+    def get_queryset(self):
+        queryset = super(OrdersListView, self).get_queryset()
+        return queryset.filter(initiator=self.request.user)
