@@ -1,11 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
 from django.shortcuts import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 
 from common.views import TitleMixin  # наш миксин
 from products.models import Basket, Product, ProductCategory
-from django.core.cache import cache
 
 # Create your views here.
 

@@ -1,11 +1,11 @@
+import os
+from http import HTTPStatus
+
+import django
 from django.test import TestCase
 from django.urls import reverse
-from http import HTTPStatus
+
 from products.models import Product, ProductCategory
-
-
-import os
-import django
 
 # для того чтобы community версия могла в дебаг режиме запускать тесты
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'store.settings')

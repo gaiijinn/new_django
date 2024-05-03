@@ -1,8 +1,11 @@
+from http import HTTPStatus
+
 from django.test import TestCase
 from django.urls import reverse
-from http import HTTPStatus
+
 from users.forms import UserRegistrationForm
-from users.models import User, EmailVerification
+from users.models import EmailVerification, User
+
 # Create your tests here.
 
 
