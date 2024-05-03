@@ -50,4 +50,3 @@ class ProductsListViewTestCASE(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(response.context_data['title'], 'Каталог')
         self.assertTemplateUsed(response, 'products/products.html')
-

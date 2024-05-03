@@ -47,6 +47,3 @@ class UserRegistrationTestView(TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(response, 'Пользователь с таким именем уже существует.', html=True)
-
-
-

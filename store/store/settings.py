@@ -65,7 +65,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'allauth.account.middleware.AccountMiddleware',  # OAuth
-    "debug_toolbar.middleware.DebugToolbarMiddleware", # toolbar
+    "debug_toolbar.middleware.DebugToolbarMiddleware",  # toolbar
 ]
 
 ROOT_URLCONF = 'store.urls'
@@ -185,7 +185,7 @@ EMAIL_PORT = '465'
 EMAIL_HOST_USER = 'vladruban8@gmail.com'
 EMAIL_HOST_PASSWORD = 'okzv rgwx coom qwsa'  # пароли приложений
 EMAIL_USE_SSL = True
-#EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend'
 
 # OAuth
 
@@ -204,7 +204,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-#celery
+# celery
 
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'

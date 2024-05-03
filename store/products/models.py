@@ -35,7 +35,7 @@ class Product(models.Model):
     def __str__(self):
         return f"Название - {self.name} | Категория - {self.category.name}"
 
-    def create_stripe_product_price(self): # для добавления товаров на страйп
+    def create_stripe_product_price(self):  # для добавления товаров на страйп
         stripe_product = stripe.Product.create(name=self.name)
         stripe_product_price = stripe.Price.create(
             product=stripe_product['id'],

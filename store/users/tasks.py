@@ -13,4 +13,3 @@ def send_email_verification(user_id):
     expiration = now() + timedelta(hours=48)
     verif = EmailVerification.objects.create(code=uuid.uuid4(), user=user, expiration=expiration)
     verif.send_verif_email()  # from models def
-

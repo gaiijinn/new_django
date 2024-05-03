@@ -9,7 +9,8 @@ admin.site.register(ProductCategory)
 @admin.register(Product)  # указуем с какой моделью работаем
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'quantity', 'category')  # дает возможность видеть поля при выборе таблицы
-    fields = ('name', 'description', ('price', 'quantity'), 'image', 'category', 'stripe_product_price_id')  # улучшает вид при выборе товара
+    fields = ('name', 'description', ('price', 'quantity'),
+              'image', 'category', 'stripe_product_price_id')  # улучшает вид при выборе товара
     readonly_fields = ('description', )  # неизменяемое поле
     search_fields = ('name',)  # поле для поиска
     ordering = ('name', )  # поле для стандартного отображения товаров по алфавитному порядку
