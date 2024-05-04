@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import environ
-import os
-
 from pathlib import Path
 
 
@@ -34,10 +32,10 @@ env = environ.Env(
     DATABASE_PORT=(str),
 
     EMAIL_HOST=(str),
-    EMAIL_PORT=(str),
+    EMAIL_PORT=(int),
     EMAIL_HOST_USER=(str),
     EMAIL_HOST_PASSWORD=(str),
-    EMAIL_USE_SSL = (bool),
+    EMAIL_USE_SSL=(bool),
 
     STRIPE_PUBLIC_KEY=(str),
     STRIPE_SECRET_KEY=(str),
@@ -76,6 +74,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.humanize',
+    'django.extensions',
 
     'products',
     'users',
@@ -151,11 +150,11 @@ CACHES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'my_store_db',
-        'USER': 'my_store_db',
-        'PASSWORD': 'admin',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'HOST': env('DATABASE_HOST'),
+        'PORT': env('DATABASE_PORT'),
     },
 }
 
